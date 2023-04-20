@@ -102,9 +102,8 @@ template void heap_sort<float>(float*, int);
     /*    Indeterministic Quick Sort   */
 
 int pivot_rand(int begin, int end){
-    std::default_random_engine re;
-    std::uniform_int_distribution <int> dist(begin, end);
-    return dist(re);
+    //ger.param(std::uniform_int_distribution<int>::param_type(begin, end));
+    return rand() % (end - begin + 1) + begin;
 }
 
 template <typename T> static void quick_sort_indeterm_utill(T *arr, int begin, int end){
@@ -136,6 +135,9 @@ template <typename T> static void intro_sort_utill_hs(T *arr, int begin, int end
     if (begin >= end)
         return;
 
+    if(end - begin < 16)
+        return insertion_sort <T> (arr + begin, end - begin + 1);
+
     if (max_depth == 0)
         return heap_sort <T> (arr + begin, end - begin + 1);
 
@@ -155,21 +157,25 @@ template void intro_sort_hs <float> (float *, int);
 
     /*   Intro Sort with Insertion sort  */
 
-template <typename T> static void intro_sort_utill_in(T *arr, int begin, int end){
+template <typename T> static void intro_sort_utill_in(T *arr, int begin, int end, int max_depth){
     if (begin >= end)
         return;
     
     if (end - begin < 16)
         return insertion_sort <T> (arr + begin, end - begin + 1);
 
+    if (max_depth == 0)
+        return merge_sort <T> (arr + begin, end - begin + 1);
+
     int p = pivot(begin, end);
     partition_Hoare <T> (arr, begin, end, p);
-    intro_sort_utill_in <T>(arr, begin, p - 1);
-    intro_sort_utill_in <T> (arr, p + 1, end);
+    intro_sort_utill_in <T>(arr, begin, p - 1, max_depth);
+    intro_sort_utill_in <T> (arr, p + 1, end, max_depth);
 }
 
 template <typename T> void intro_sort_in(T *arr, int size){
-    intro_sort_utill_in <T>(arr, 0, size - 1);
+    int d = log2(size);
+    intro_sort_utill_in <T>(arr, 0, size - 1, 2*d);
 }
 
 template void intro_sort_in<int>(int *, int);
@@ -221,12 +227,12 @@ template <typename T> static void intro_sort_utill_ms(T *arr, int begin, int end
     if (begin >= end)
         return;
 
+    if (end - begin < 16)
+        return insertion_sort <T> (arr + begin, end - begin + 1);
+    
     if (max_depth == 0)
         return merge_sort <T> (arr + begin, end - begin + 1);
     
-    if (end - begin < 16)
-        return insertion_sort <T> (arr + begin, end - begin + 1);
-
     int p = pivot(begin, end);
     partition_Hoare <T> (arr, begin, end, p);
     intro_sort_utill_ms <T>(arr, begin, p - 1, max_depth - 1);

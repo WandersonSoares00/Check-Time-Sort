@@ -22,7 +22,7 @@ template <typename T> static void heapify(T *arr, int size, int i);
 template <typename T> static void build_max_heap(T *arr, int size);
 template <typename T> void heap_sort(T *arr, int size);
 
-int pivot_rand(int begin, int end);
+int pivot_rand(int begin, int end); //, std::default_random_engine& re, std::uniform_int_distribution<int>& ger
 template <typename T> static void quick_sort_indeterm_utill(T *arr, int begin, int end);
 template <typename T> void quick_sort_indeterm(T *arr, int size);
 
@@ -31,7 +31,7 @@ int log2(int a);
 template <typename T> static void intro_sort_utill_hs(T *arr, int begin, int end, int max_depth);
 template <typename T> void intro_sort_hs(T *arr, int size);
 
-template <typename T> static void intro_sort_utill_in(T *arr, int begin, int end);
+template <typename T> static void intro_sort_utill_in(T *arr, int begin, int end, int max_depth);
 template <typename T> void intro_sort_in(T *arr, int size);
 
 template <typename T> static void merge(T *arr, int begin, int mid, int end);

@@ -41,7 +41,7 @@ template <typename T> class SortingTime{
     int size;
     public:
 
-    SortingTime(T *v, int size);
+    SortingTime(T **v, int size);
     ~SortingTime();
 
     void copy(T *v1, T *v2);
@@ -50,10 +50,10 @@ template <typename T> class SortingTime{
 };
 
 template <typename T>
-SortingTime<T> :: SortingTime(T *v, int size){
+SortingTime<T> :: SortingTime(T **v, int size){
     this-> size = size;
-    this-> v = v;
-    this-> v = new int[size];
+    *v = new int[size];
+    this-> v = *v;
     cpy_v    = new T[size];
 }
 
