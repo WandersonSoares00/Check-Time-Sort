@@ -51,13 +51,14 @@ template <typename T> class SortingTime{
 
 template <typename T>
 SortingTime<T> :: SortingTime(T *v, int size){
-    this-> v = v;
     this-> size = size;
-    cpy_v = new T[size];
+    this-> v = v;
+    this-> v = new int[size];
+    cpy_v    = new T[size];
 }
 
 template <typename T>
-SortingTime<T> :: ~SortingTime(){  delete[] cpy_v;  }
+SortingTime<T> :: ~SortingTime(){  delete[] cpy_v; delete[] v; }
 
 template <typename T>
 void SortingTime<T> :: copy(T *v1, T *v2){

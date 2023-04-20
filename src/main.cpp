@@ -15,7 +15,7 @@ int main(int argc, char **argv){
 
         int i = atoi(argv[3]);
         int size = atoi(argv[2]);
-        int *v = new int[size];
+        int *v;
         SortingTime<int> sort(v, size);
         
         fill_array <int>(v, size, *argv[1]);
