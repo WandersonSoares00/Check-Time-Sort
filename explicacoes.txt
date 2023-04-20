@@ -1,2 +1,0 @@
-O código está separado em arquivos, mas criei um makefile.
-Basta digitar "make all" que o utilitário criará um arquivo executável chamado "main" na pasta atual.
