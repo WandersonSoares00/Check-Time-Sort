@@ -22,21 +22,62 @@ class Random_gerator{
 public:
 
     Random_gerator(T a, T b) : ger{rd()}, dist{a, b} {};
+    
     T operator() (){    return dist(ger);   }
 };
 
-template <typename T> static void fill_random(T *arr, int size);
+template <typename T>
+static void fill_random(T *arr, int size){
+    Random_gerator <T> ger(0, size);
+    for (T *i = arr, *end = arr+size; i != end; ++i)      *i = ger();
+}
 
-template <typename T> static void fill_descend_order(T *arr, int size);
+template <typename T>
+static void fill_descend_order(T *arr, int size){
+    int count = 1;
+    for (int i = 0; i <size; ++i, ++count)      arr[i] = size - count;
+}
 
-//template <typename T> static void fill_worst_case_qs_utill(T *arr, int *pos, int end);
-template <typename T> static void fill_worst_case_qs(T *arr, int size);
+template <typename T>
+static void fill_ascend_order(T *arr, int size){
+    int count = 0;
+    for (T *i = arr, *end = arr+size; i != end; ++i, ++count)      *i = count;
+}
 
-template <typename T> static void fill_ascend_order(T *arr, int size);
+template <typename T>
+static void fill_worst_case_qs(T *arr, int size){
+    int *pos = new int[size];
+    fill_ascend_order <int> (pos, size);
+    
+    for (int i = size-1; i >= 0; --i){
+        int p = pivot(0, i);
+        arr[ pos[p] ] = i;
+        swap (pos[p], pos[0]);
+        swap (pos[0], pos[i]);
+    }
 
-template <typename T> void fill_array(T *arr, int size, char t);
+    delete[] pos;
+}
 
-template <typename T> class SortingTime{
+template <typename T>
+void fill_array(T *arr, int size, char t){
+    switch (t){
+        case 'A':
+            fill_random <T> (arr, size);         break;
+        case 'C':
+            fill_ascend_order <T>(arr, size);    break;
+        case 'D':
+            fill_descend_order <T>(arr, size);   break;
+        case 'P':
+            fill_worst_case_qs <T>(arr, size);   break;
+        default:
+            throw std::invalid_argument("Use: A (aleatória), C (ordem crescente), D (ordem decrescente), e P (pior caso).");
+    }
+}
+
+
+template <typename T>
+class SortingTime{
     T *v, *cpy_v;
     int size;
     public:
