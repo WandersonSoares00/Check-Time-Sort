@@ -27,7 +27,7 @@ The program generetes instances for sorting and runs them for each algorithm. Fo
     `cd Check-Time-Sort`
 3. Compile:
     `make all`
-4. Run with options:
+4. Run with options: <br>
     The program can be executed using the following format: <br>
     *./main [instance type] [array size] [number of instances]* <br>
     
