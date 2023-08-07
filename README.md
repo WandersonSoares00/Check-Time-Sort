@@ -28,8 +28,8 @@ The program generetes instances for sorting and runs them for each algorithm. Fo
 3. Compile:
     `make all`
 4. Run with options:
-    The program can be executed using the following format:
-    ./main [instance type] [array size] [number of instances]
+    The program can be executed using the following format: <br>
+    *./main [instance type] [array size] [number of instances]* <br>
     
     Where [instance type] can be A (for random), C (for Ascending order), D (for Descending order) or P(for Worst case)
 
